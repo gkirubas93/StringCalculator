@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -18,10 +20,18 @@ public class StringCalculator {
         }
 
         String[] numbers = input.split(delimiter);
+        List<Integer> negatives = new ArrayList<>();
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int num = Integer.parseInt(number);
+            if (num < 0) negatives.add(num);
+            else sum += num;
         }
+
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException("Negatives not allowed: " + negatives);
+        }
+
         return sum;
     }
 }
