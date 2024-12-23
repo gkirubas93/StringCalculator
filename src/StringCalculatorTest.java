@@ -6,7 +6,8 @@ public class StringCalculatorTest {
     private final StringCalculator calculator = new StringCalculator();
 
     @Test
-    public void emptyString() {
+    public void runTest() {
         assertEquals(0, calculator.add(""));
+        assertEquals(1, calculator.add("1"));
     }
 }
