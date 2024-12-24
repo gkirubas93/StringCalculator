@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -16,7 +17,14 @@ public class StringCalculator {
         String delimiter = "[,\\n]";
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\\n");
-            delimiter = Pattern.quote(input.substring(2, delimiterIndex));
+            String delimitersPart = input.substring(2, delimiterIndex);
+
+            if (delimitersPart.startsWith("[")) {
+                delimiter = buildDelimiterRegex(delimitersPart);
+            } else {
+                delimiter = Pattern.quote(delimitersPart);
+            }
+
             input = input.substring(delimiterIndex + 2);
         }
 
@@ -34,5 +42,14 @@ public class StringCalculator {
         }
 
         return sum;
+    }
+
+    private String buildDelimiterRegex(String delimitersPart) {
+        Matcher matcher = Pattern.compile("\\[(.*?)]").matcher(delimitersPart);
+        List<String> delimiters = new ArrayList<>();
+        while (matcher.find()) {
+            delimiters.add(Pattern.quote(matcher.group(1)));
+        }
+        return String.join("|", delimiters);
     }
 }

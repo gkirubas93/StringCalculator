@@ -14,6 +14,7 @@ public class StringCalculatorTest {
         assertEquals(6, calculator.add("1\n2,3"));
         assertEquals(3, calculator.add("//;\\n1;2"));
         assertEquals(1000, calculator.add("1000,1001"));
+        assertEquals(6, calculator.add("//[***]\\n1***2***3"));
 
         try {
             calculator.add("1,-2,-3");
