@@ -12,6 +12,7 @@ public class StringCalculator {
 
     public int add(String input) {
         if (input.isEmpty()) return 0;
+//        String delimiter = ",|\\n";
         String delimiter = "[,\\n]";
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\\n");
@@ -25,7 +26,7 @@ public class StringCalculator {
         for (String number : numbers) {
             int num = Integer.parseInt(number);
             if (num < 0) negatives.add(num);
-            else sum += num;
+            else if (num <= 1000) sum += num;
         }
 
         if (!negatives.isEmpty()) {
